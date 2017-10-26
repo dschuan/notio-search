@@ -37,8 +37,7 @@ export default class Index extends Component {
     this.setState({ query: e.target.value });
   }
   queryProcessor() {
-    const query = `/${this.state.query}`;
-    console.log(query.replace(/\s+/g, '-'));
+    const query = `/search/${this.state.query}`;
     return query.replace(/\s+/g, '-');
   }
   render() {

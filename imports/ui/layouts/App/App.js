@@ -23,7 +23,6 @@ import NotFound from '../../pages/NotFound/NotFound';
 import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
-import ExamplePage from '../../pages/ExamplePage/ExamplePage';
 import Results from '../../components/Results/Results';
 
 import './App.scss';
@@ -44,10 +43,10 @@ const App = props => (
       {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Navigation {...props} />
       <Index {...props} />
-      <Grid>
+      <Grid bsStyle="gridStuff">
         <Switch>
           <Route exact name="index" path="/" component={Footer} />
-          <Public exact path="/:search" component={Results} {...props} />
+          <Public exact path="/search/:search" component={Results} {...props} />
           <Authenticated exact path="/profile" component={Profile} {...props} />
           <Public path="/signup" component={Signup} {...props} />
           <Public path="/login" component={Login} {...props} />
@@ -57,7 +56,6 @@ const App = props => (
           <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
           <Route name="terms" path="/terms" component={Terms} />
           <Route name="privacy" path="/privacy" component={Privacy} />
-          <Route name="examplePage" path="/example-page" component={ExamplePage} />
           <Route component={NotFound} />
         </Switch>
       </Grid>

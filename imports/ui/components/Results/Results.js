@@ -31,7 +31,6 @@ class Results extends Component {
   }
   renderResults() {
     return this.state.results.map((result) => {
-      console.log(result);
       return (
         <div key={result.cacheId}>
           <a href={result.link}><h4>{result.title}</h4></a>

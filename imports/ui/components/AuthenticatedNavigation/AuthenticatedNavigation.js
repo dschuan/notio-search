@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Meteor } from 'meteor/meteor';
 
 const AuthenticatedNavigation = ({ name, history }) => (
   <div>
-    <Nav>
-      <LinkContainer to="/documents">
-        <NavItem eventKey={1} href="/documents">Documents</NavItem>
-      </LinkContainer>
+    <Nav pullRight>
+      <NavDropdown eventKey={3}>
+        <NavItem eventKey={3.1}> 0 coins </NavItem>
+      </NavDropdown>
     </Nav>
     <Nav pullRight>
       <NavDropdown eventKey={2} title={name} id="user-nav-dropdown">
@@ -26,6 +25,7 @@ const AuthenticatedNavigation = ({ name, history }) => (
 
 AuthenticatedNavigation.propTypes = {
   name: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(AuthenticatedNavigation);
