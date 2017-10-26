@@ -1,24 +1,65 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+// eslint-disable jsx/prefer-template
 
+import React, { Component } from 'react';
+import { Row, Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Index.scss';
+import validate from '../../../modules/validate';
 
-const Index = () => (
-  <div className="Index">
-    <img
-      src="https://s3-us-west-2.amazonaws.com/cleverbeagle-assets/graphics/email-icon.png"
-      alt="Clever Beagle"
-    />
-    <h1>Pup</h1>
-    <p>A boilerplate for products.</p>
-    <div>
-      <Button href="http://cleverbeagle.com/pup">Read the Docs</Button>
-      <Button href="https://github.com/cleverbeagle/pup"><i className="fa fa-star" /> Star on GitHub</Button>
-    </div>
-    <footer>
-      <p>Need help and want to stay accountable building your product? <a href="http://cleverbeagle.com?utm_source=pupappindex&utm_campaign=oss">Check out Clever Beagle</a>.</p>
-    </footer>
-  </div>
-);
 
-export default Index;
+export default class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+    };
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+  }
+
+  componentDidMount() {
+    const component = this;
+    validate(component.form, {
+      rules: {
+        query: {
+          required: true,
+        },
+      },
+      messages: {
+        query: {
+          required: 'Enter a search term',
+        },
+      },
+    });
+  }
+
+
+  onChangeHandler(e) {
+    this.setState({ query: e.target.value });
+  }
+  queryProcessor() {
+    const query = `/${this.state.query}`;
+    console.log(query.replace(/\s+/g, '-'));
+    return query.replace(/\s+/g, '-');
+  }
+  render() {
+    return (
+      <div>
+        <Row>
+          <form>
+            <FormGroup bsSize="large">
+              <FormControl
+                type="text"
+                placeholder="Enter your query"
+                onChange={this.onChangeHandler}
+              />
+            </FormGroup>
+            <Link to={this.queryProcessor()}><Button bsStyle="success">Search</Button></Link>
+          </form>
+        </Row>
+        <footer>
+          <p>Notio Search Engine</p>
+        </footer>
+      </div>
+    );
+  }
+}

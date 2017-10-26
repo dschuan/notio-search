@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/no-href*/
+/* eslint-disable jsx-a11y/no-href */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -12,10 +12,6 @@ import Navigation from '../../components/Navigation/Navigation';
 import Authenticated from '../../components/Authenticated/Authenticated';
 import Public from '../../components/Public/Public';
 import Index from '../../pages/Index/Index';
-import Documents from '../../pages/Documents/Documents';
-import NewDocument from '../../pages/NewDocument/NewDocument';
-import ViewDocument from '../../pages/ViewDocument/ViewDocument';
-import EditDocument from '../../pages/EditDocument/EditDocument';
 import Signup from '../../pages/Signup/Signup';
 import Login from '../../pages/Login/Login';
 import Logout from '../../pages/Logout/Logout';
@@ -28,6 +24,7 @@ import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import ExamplePage from '../../pages/ExamplePage/ExamplePage';
+import Results from '../../components/Results/Results';
 
 import './App.scss';
 
@@ -46,13 +43,11 @@ const App = props => (
     {!props.loading ? <div className="App">
       {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Navigation {...props} />
+      <Index {...props} />
       <Grid>
         <Switch>
-          <Route exact name="index" path="/" component={Index} />
-          <Authenticated exact path="/documents" component={Documents} {...props} />
-          <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
-          <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
-          <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
+          <Route exact name="index" path="/" component={Footer} />
+          <Public exact path="/:search" component={Results} {...props} />
           <Authenticated exact path="/profile" component={Profile} {...props} />
           <Public path="/signup" component={Signup} {...props} />
           <Public path="/login" component={Login} {...props} />
