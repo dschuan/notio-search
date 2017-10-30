@@ -7,7 +7,7 @@ import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 const AuthenticatedNavigation = ({ name, history }) => (
   <div>
     <Nav pullRight>
-      <NavDropdown eventKey={3} title={`${1 - 1} coins`}>
+      <NavDropdown eventKey={3} title={`${1 - 1} coins`} id="user-nav-coin">
         <NavItem eventKey={3.1}> {999}/{1000} points </NavItem>
       </NavDropdown>
     </Nav>

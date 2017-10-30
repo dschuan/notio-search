@@ -38,11 +38,12 @@ export default class Index extends Component {
   }
   queryProcessor() {
     const query = `/search/${this.state.query}`;
+    console.log(query);
     return query.replace(/\s+/g, '-');
   }
   render() {
     return (
-      <div>
+      <div className="Index">
         <Row>
           <form>
             <FormGroup bsSize="large">

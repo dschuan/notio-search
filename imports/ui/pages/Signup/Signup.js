@@ -62,6 +62,12 @@ class Signup extends React.Component {
     Accounts.createUser({
       email: this.emailAddress.value,
       password: this.password.value,
+      coins: {
+        currency: 0,
+        points: 0,
+        target: 1000,
+        lastEdited: (new Date()).toISOString(),
+      },
       profile: {
         name: {
           first: this.firstName.value,
@@ -74,7 +80,7 @@ class Signup extends React.Component {
       } else {
         Meteor.call('users.sendVerificationEmail');
         Bert.alert('Welcome!', 'success');
-        history.push('/documents');
+        history.push('/search');
       }
     });
   }
