@@ -5,6 +5,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import Loading from '../Loading/Loading';
+import Index from '../../pages/Index/Index';
 
 class Results extends Component {
   constructor(props) {
@@ -43,7 +44,11 @@ class Results extends Component {
 
   render() {
     return (
-      this.state.results.length === 0 ? <Loading /> : <div>{this.renderResults()}</div>
+      this.state.results.length === 0 ? <Loading /> : (
+        <div>
+          <Index {...this.props} />
+          {this.renderResults()}
+        </div>)
     );
   }
 }
