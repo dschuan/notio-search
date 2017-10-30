@@ -35,6 +35,10 @@ Meteor.methods({
         $set: { 'coins.points': currPoints - target },
         $inc: { 'coins.currency': 1 },
       });
+    } else {
+      Meteor.users.update({ _id: this.userId() }, {
+        $inc: { 'coins.points': points },
+      });
     }
   },
 });

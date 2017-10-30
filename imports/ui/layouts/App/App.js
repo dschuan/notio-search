@@ -45,7 +45,7 @@ const App = props => (
       <Index {...props} />
       <Grid bsStyle="gridStuff">
         <Switch>
-          <Route exact name="index" path="/" component={Footer} />
+          <Route exact name="index" path="/" component={Index} {...props} />
           <Route exact path="/search/:search" component={Results} {...props} />
           <Authenticated exact path="/profile" component={Profile} {...props} />
           <Public path="/signup" component={Signup} {...props} />
