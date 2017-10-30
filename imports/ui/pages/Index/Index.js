@@ -1,5 +1,5 @@
 // eslint-disable jsx/prefer-template
-
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Row, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -41,6 +41,9 @@ export default class Index extends Component {
     console.log(query);
     return query.replace(/\s+/g, '-');
   }
+  clickHandler() {
+    Meteor.call('users.addPoints', 999);
+  }
   render() {
     return (
       <div className="Index">
@@ -53,7 +56,7 @@ export default class Index extends Component {
                 onChange={this.onChangeHandler}
               />
             </FormGroup>
-            <Link to={this.queryProcessor()}><Button bsStyle="success">Search</Button></Link>
+            <Link to={this.queryProcessor()}><Button bsStyle="success" type="button" onClick={this.clickHandler.bind(this)}>Search</Button></Link>
           </form>
         </Row>
         <footer>

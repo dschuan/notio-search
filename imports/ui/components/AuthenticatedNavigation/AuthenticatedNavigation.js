@@ -4,11 +4,11 @@ import { withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
-const AuthenticatedNavigation = ({ name, history }) => (
+const AuthenticatedNavigation = ({ name, history, coinData }) => (
   <div>
     <Nav pullRight>
-      <NavDropdown eventKey={3} title={`${1 - 1} coins`} id="user-nav-coin">
-        <NavItem eventKey={3.1}> {999}/{1000} points </NavItem>
+      <NavDropdown eventKey={3} title={`${coinData.currency} coins`} id="user-nav-coin">
+        <NavItem eventKey={3.1}> {coinData.points}/{coinData.target} points </NavItem>
       </NavDropdown>
     </Nav>
     <Nav pullRight>
@@ -26,6 +26,7 @@ const AuthenticatedNavigation = ({ name, history }) => (
 AuthenticatedNavigation.propTypes = {
   name: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
+  coinData: PropTypes.object.isRequired,
 };
 
 export default withRouter(AuthenticatedNavigation);

@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import Loading from '../Loading/Loading';
 import Index from '../../pages/Index/Index';
@@ -27,14 +28,15 @@ class Results extends Component {
           component.setState({ results: array });
         });
   }
-  componentWillUnmount() {
-    this.serverRequest.abort();
+
+  onClickHandler() {
+    Meteor.call('users.addPoints', 12);
   }
   renderResults() {
     return this.state.results.map((result) => {
       return (
         <div key={result.cacheId}>
-          <a href={result.link}><h4>{result.title}</h4></a>
+          <a href={result.link} onClick={this.onClickHandler.bind(this)}><h4>{result.title}</h4></a>
           <p> {result.snippet} </p>
           <br />
         </div>

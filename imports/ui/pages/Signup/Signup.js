@@ -62,13 +62,13 @@ class Signup extends React.Component {
     Accounts.createUser({
       email: this.emailAddress.value,
       password: this.password.value,
-      coins: {
-        currency: 0,
-        points: 0,
-        target: 1000,
-        lastEdited: (new Date()).toISOString(),
-      },
       profile: {
+        coins: {
+          currency: 0,
+          points: 0,
+          target: 1000,
+          lastEdited: (new Date()).toISOString(),
+        },
         name: {
           first: this.firstName.value,
           last: this.lastName.value,

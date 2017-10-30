@@ -27,17 +27,17 @@ Meteor.methods({
   },
   'users.addPoints': function addPoints(points) {
     check(points, Number);
-    const user = Meteor.users.findOne(this.userId());
-    const target = user.coins.target;
-    const currPoints = user.coins.points + points;
+    const user = Meteor.users.findOne(this.userId);
+    const target = user.profile.coins.target;
+    const currPoints = user.profile.coins.points + points;
     if (currPoints - target >= 0) {
-      Meteor.users.update({ _id: this.userId() }, {
-        $set: { 'coins.points': currPoints - target },
-        $inc: { 'coins.currency': 1 },
+      Meteor.users.update({ _id: this.userId }, {
+        $set: { 'profile.coins.points': currPoints - target },
+        $inc: { 'profile.coins.currency': 1 },
       });
     } else {
-      Meteor.users.update({ _id: this.userId() }, {
-        $inc: { 'coins.points': points },
+      Meteor.users.update({ _id: this.userId }, {
+        $inc: { 'profile.coins.points': points },
       });
     }
   },

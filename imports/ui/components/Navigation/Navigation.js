@@ -1,6 +1,8 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { Navbar } from 'react-bootstrap';
+import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
@@ -29,4 +31,7 @@ Navigation.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-export default Navigation;
+export default createContainer(() => {
+  const user = Meteor.user();
+  return { coinData: user.profile.coins };
+}, Navigation);
