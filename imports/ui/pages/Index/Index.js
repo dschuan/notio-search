@@ -14,6 +14,7 @@ export default class Index extends Component {
       query: '',
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -38,11 +39,11 @@ export default class Index extends Component {
   }
   queryProcessor() {
     const query = `/search/${this.state.query}`;
-    console.log(query);
     return query.replace(/\s+/g, '-');
   }
   clickHandler() {
-    Meteor.call('users.addPoints', 999);
+    Meteor.call('users.addPoints', 10);
+    this.props.history.push(this.queryProcessor());
   }
   render() {
     return (
@@ -56,7 +57,7 @@ export default class Index extends Component {
                 onChange={this.onChangeHandler}
               />
             </FormGroup>
-            <Link to={this.queryProcessor()}><Button bsStyle="success" type="button" onClick={this.clickHandler.bind(this)}>Search</Button></Link>
+            <Button bsStyle="success" type="button" onClick={this.clickHandler}>Search</Button>
           </form>
         </Row>
         <footer>

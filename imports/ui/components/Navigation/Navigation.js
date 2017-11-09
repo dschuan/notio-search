@@ -30,8 +30,9 @@ Navigation.defaultProps = {
 Navigation.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
-
-export default createContainer(() => {
-  const user = Meteor.user();
-  return { coinData: user.profile.coins };
+export default createContainer(({ authenticated }) => {
+  return {
+    authenticated,
+    coinData: authenticated ? Meteor.user().profile.coins : {},
+  };
 }, Navigation);

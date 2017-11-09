@@ -12,6 +12,7 @@ class Results extends Component {
   constructor(props) {
     super(props);
     this.state = ({ results: [] });
+    this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +29,20 @@ class Results extends Component {
           component.setState({ results: array });
         });
   }
-
+  componentWillReceiveProps(nextProps) {
+    const component = this;
+    component.serverRequest =
+      axios
+        .get(nextProps.url)
+        .then((results) => {
+          const array = [];
+          results.data.items.map((item) => {
+            array.push(item);
+            return '';
+          });
+          component.setState({ results: array });
+        });
+  }
   onClickHandler() {
     Meteor.call('users.addPoints', 12);
   }
@@ -36,8 +50,8 @@ class Results extends Component {
     return this.state.results.map((result) => {
       return (
         <div key={result.cacheId}>
-          <a href={result.link} onClick={this.onClickHandler.bind(this)}><h4>{result.title}</h4></a>
-          <p> {result.snippet} </p>
+          <a key={`a${result.cacheId}`} href={result.link} onClick={this.onClickHandler}><h4>{result.title}</h4></a>
+          <p key={`p${result.cacheId}`}> {result.snippet} </p>
           <br />
         </div>
       );
@@ -61,6 +75,7 @@ Results.propTypes = {
 
 export default createContainer((props) => {
   const query = props.match.url;
+  console.log(query);
   const url = `https://www.googleapis.com/customsearch/v1?key=AIzaSyDV3n3elroytZ-17iafumq1TrKNXno8Ylo&cx=002529225133273433045:lqcq155wmje&q=${query}`;
-  return { url };
+  return { query, url };
 }, Results);
