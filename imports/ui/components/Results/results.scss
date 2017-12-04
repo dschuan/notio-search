@@ -1,0 +1,30 @@
+@import '../../stylesheets/mixins';
+@import '../../stylesheets/colors';
+
+.ResultsIndex .Index {
+  img {
+    height: 0;
+  }
+  padding-left: 0;
+  .form-group.form-group-lg {
+    margin: -5% 20% 0 15px;
+  }
+}
+
+.ButtonSections {
+  display: flex;
+  flex-direction: row;
+
+  .prev {
+    align-self: flex-start;
+    margin-left: -15px;
+    font-size: 24px;
+    font-weight: 500;
+
+  }
+  .next {
+    margin-left: auto;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

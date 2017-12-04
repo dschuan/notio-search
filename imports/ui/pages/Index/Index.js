@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Row, Button, FormGroup, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Index.scss';
 import validate from '../../../modules/validate';
 
@@ -14,7 +14,7 @@ export default class Index extends Component {
       query: '',
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   componentDidMount() {
@@ -41,29 +41,37 @@ export default class Index extends Component {
     const query = `/search/${this.state.query}`;
     return query.replace(/\s+/g, '-');
   }
-  clickHandler() {
+  submitHandler(e) {
+    e.preventDefault();
     Meteor.call('users.addPoints', 10);
     this.props.history.push(this.queryProcessor());
   }
   render() {
     return (
       <div className="Index">
+        <img src="/notio.png" alt="notio search" />
         <Row>
-          <form>
-            <FormGroup bsSize="large">
+          <form onSubmit={this.submitHandler}>
+            <FormGroup bsSize="large" role="form">
               <FormControl
                 type="text"
                 placeholder="Enter your query"
+                defaultValue={this.props.defaultQuery}
                 onChange={this.onChangeHandler}
               />
+              <Button bsStyle="success" type="submit">Search</Button>
             </FormGroup>
-            <Button bsStyle="success" type="button" onClick={this.clickHandler}>Search</Button>
           </form>
         </Row>
-        <footer>
-          <p>Notio Search Engine</p>
-        </footer>
       </div>
     );
   }
 }
+Index.defaultProps = {
+  defaultQuery: '',
+};
+
+Index.propTypes = {
+  history: PropTypes.object.isRequired,
+  defaultQuery: PropTypes.string,
+};

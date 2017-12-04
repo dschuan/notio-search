@@ -14,7 +14,7 @@ class Logout extends React.Component {
         <h1>{'Don\'t go :('}</h1>
         <p>{'Login to earn your future rewards'}</p>
         <br />
-        <Index />
+        <Index {...this.props} />
       </div>
     );
   }

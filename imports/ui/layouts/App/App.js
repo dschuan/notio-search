@@ -22,6 +22,7 @@ import Profile from '../../pages/Profile/Profile';
 import NotFound from '../../pages/NotFound/NotFound';
 import Footer from '../../components/Footer/Footer';
 import Results from '../../components/Results/Results';
+import Test from '../../components/Test/Test';
 
 import './App.scss';
 
@@ -38,12 +39,12 @@ const handleResendVerificationEmail = (emailAddress) => {
 const App = props => (
   <Router>
     {!props.loading ? <div className="App">
-      {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Navigation {...props} />
       <Grid bsStyle="gridStuff">
         <Switch>
           <Route exact name="index" path="/" component={Index} {...props} />
           <Route exact path="/search/:search" component={Results} {...props} />
+          <Route exact path="/test" component={Test} {...props} />
           <Authenticated exact path="/profile" component={Profile} {...props} />
           <Public path="/signup" component={Signup} {...props} />
           <Public path="/login" component={Login} {...props} />
@@ -54,7 +55,7 @@ const App = props => (
           <Route component={NotFound} />
         </Switch>
       </Grid>
-      <Footer />
+      <Footer> Notio Search </Footer>
     </div> : ''}
   </Router>
 );

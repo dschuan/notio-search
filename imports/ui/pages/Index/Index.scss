@@ -1,12 +1,22 @@
 @import '../../stylesheets/mixins';
 @import '../../stylesheets/colors';
 
+.form-group.form-group-lg {
+  display: flex;
+  flex-direction: row;
+  margin: 0 20%;
+}
 .Index {
   padding: 50px;
   text-align: center;
   border-radius: 3px;
   color: #fff;
 
+  img {
+    width: 200px;
+    height: auto;
+    margin: 0 0 10px 3%;
+  }
   h1 {
     font-size: 28px;
   }
@@ -15,7 +25,9 @@
     font-size: 18px;
     color: lighten($cb-blue, 25%);
   }
-
+  button {
+    margin: 5px 0 15px 10px;
+  }
   footer {
     margin: 20px -20px -20px;
     padding: 20px;

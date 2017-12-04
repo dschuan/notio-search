@@ -4,11 +4,25 @@ import { withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
+const RenderBar = (points, target) => {
+  const percentage = (points / target) * 100;
+  return (
+    <div>
+      <div className="progress">
+        <div className="progress-bar" role="progressbar" style={{ width: `${percentage}%` }} aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100" />
+      </div>
+    </div>
+  );
+};
+
 const AuthenticatedNavigation = ({ name, history, coinData }) => (
   <div>
     <Nav pullRight>
       <NavDropdown eventKey={3} title={`${coinData.currency} coins`} id="user-nav-coin">
-        <NavItem eventKey={3.1}> {coinData.points}/{coinData.target} points </NavItem>
+        <NavItem eventKey={3.1}>
+          {RenderBar(coinData.points, coinData.target)}
+          {coinData.points} out of {coinData.target} points
+        </NavItem>
       </NavDropdown>
     </Nav>
     <Nav pullRight>

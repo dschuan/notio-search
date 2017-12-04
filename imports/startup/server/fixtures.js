@@ -1,6 +1,16 @@
 import seeder from '@cleverbeagle/seeder';
 import { Meteor } from 'meteor/meteor';
 import Documents from '../../api/Documents/Documents';
+import CoinThreshold from '../../api/Coin/CoinThreshold';
+
+seeder(CoinThreshold, {
+  environments: ['development', 'staging'],
+  wipe: true,
+  data: [{
+    threshold: 2000,
+  }],
+});
+
 
 const documentsSeed = userId => ({
   collection: Documents,
@@ -27,6 +37,11 @@ seeder(Meteor.users, {
         first: 'Andy',
         last: 'Warhol',
       },
+      coins: {
+        currency: 0,
+        points: 0,
+        target: 1000,
+      },
     },
     roles: ['admin'],
     data(userId) {
@@ -43,6 +58,11 @@ seeder(Meteor.users, {
         name: {
           first: faker.name.firstName(),
           last: faker.name.lastName(),
+        },
+        coins: {
+          currency: 0,
+          points: 0,
+          target: 1000,
         },
       },
       roles: ['user'],
