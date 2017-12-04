@@ -7,7 +7,7 @@ seeder(CoinThreshold, {
   environments: ['development', 'staging'],
   wipe: true,
   data: [{
-    threshold: 2000,
+    threshold: 1000,
   }],
 });
 
